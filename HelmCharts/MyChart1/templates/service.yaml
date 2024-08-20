@@ -11,5 +11,5 @@ spec:
     - name      : {{ .Release.Name }}-listener
       protocol  : TCP
       port      : 80  # Port on Load Balancer
-      targetPort: 80  # Port on POD
+      targetPort: 8043  # Port on POD
   type: ClusterIP
