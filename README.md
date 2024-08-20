@@ -1,2 +1,2 @@
 # argocd
-repo for agrocd applications
+repo for argocd applications
