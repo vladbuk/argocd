@@ -8,7 +8,7 @@ metadata:
 spec:
   destination:
     name     : in-cluster
-    namespace: app2
+    namespace: default
   source:
     path   : "HelmCharts/MyChart2"
     repoURL: "git@github.com:vladbuk/argocd.git"
