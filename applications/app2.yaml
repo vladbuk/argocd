@@ -16,9 +16,9 @@ spec:
     helm:
       valueFiles:
       - values_dev.yaml
-      parameters:
-      - name: "container.image"
-        value: adv4000/app2:v2
+      # parameters:
+      # - name: "container.image"
+      #   value: adv4000/app2:v2
 
   project: default
   syncPolicy:
