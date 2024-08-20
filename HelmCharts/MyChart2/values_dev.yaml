@@ -1,7 +1,7 @@
 # Dev Override Values for my Helm Chart
 
 container:
-  image: vladbuk/k8sphp:0.1
+  image: vladbuk/gostatic:0.1
 
 replicaCount: 2
 
