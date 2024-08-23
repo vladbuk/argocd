@@ -1,4 +1,4 @@
-service.port: 80
+servicePort: 80
 
 ingress:
   enabled: true
