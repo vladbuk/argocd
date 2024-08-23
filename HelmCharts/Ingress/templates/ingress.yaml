@@ -13,48 +13,13 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: kuber-service
+                name: app-v1-service
                 port: 
                   number: 80
           - path: /v1
             pathType: Prefix
             backend:
               service:
-                name: kuber-service-v1
-                port: 
-                  number: 80
-          - path: /v2
-            pathType: Prefix
-            backend:
-              service:
-                name: kuber-service-v2
-                port: 
-                  number: 80
-          - path: /v3
-            pathType: Prefix
-            backend:
-              service:
-                name: kuber-service-v3
-                port: 
-                  number: 80
-          - path: /v4
-            pathType: Prefix
-            backend:
-              service:
-                name: kuber-service-v4
-                port: 
-                  number: 80
-          - path: /app1
-            pathType: Prefix
-            backend:
-              service:
-                name: myapp1-service
-                port: 
-                  number: 80
-          - path: /app2
-            pathType: Prefix
-            backend:
-              service:
-                name: myapp2-service
+                name: app-v1-service
                 port: 
                   number: 80
