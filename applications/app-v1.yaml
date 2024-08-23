@@ -1,45 +1,29 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
-  name: app-v1
-  labels:
-    app: app-v1
+  name     : app-v1
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
 spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: http-server-v1
-  template:
-    metadata:
-      labels:
-        app: http-server-v1
-    spec:
-      containers:
-      - name: kuber-k8sphp
-        image: vladbuk/k8sphp:0.1
-        ports:
-        - containerPort: 80
-        resources:
-          requests:
-            memory: "64Mi"
-            cpu: "25m"
-          limits:
-            memory: "128Mi"
-            cpu: "50m"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: app-v1-service
-  annotations:
-    cloud.google.com/neg: '{"ingress": true}'
-spec:
-  selector:
-    app: http-server-v1
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
-      #nodePort: 30010 # port-range: 30000-32767
-  type: ClusterIP
+  destination:
+    name     : in-cluster
+    namespace: default
+  source:
+    path   : "yaml/app-v1"
+    repoURL: "git@github.com:vladbuk/argocd.git"
+    targetRevision: HEAD
+    # helm:
+    #   valueFiles:
+    #   - values_dev.yaml
+      # parameters:
+      # - name: "container.image"
+      #   value: adv4000/app1:v3
 
+  project: default
+  syncPolicy:
+    automated:
+      prune   : true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true         
