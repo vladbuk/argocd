@@ -18,6 +18,8 @@ ingress:
                 name: app-latest-service
                 port: 
                   number: 80
+              serviceName: app-latest-service
+              servicePort: 80
           - path: /v1
             pathType: Prefix
             backend:
