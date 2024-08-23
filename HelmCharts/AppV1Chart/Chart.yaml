@@ -1,0 +1,16 @@
+apiVersion: v2
+name: app-v1
+description: A Helm chart for app-v1 in Kubernetes
+type: application
+version: 0.1.0
+appVersion: "0.1"
+
+keywords:
+  - apache
+  - http
+  - php
+
+maintainers:
+  - name : vladbuk
+    # email: denis@astahov.net
+    # url  : www.astahov.net

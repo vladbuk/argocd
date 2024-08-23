@@ -10,12 +10,12 @@ spec:
     name     : in-cluster
     namespace: default
   source:
-    path   : "yaml/app-v1"
+    path   : "HelmCharts/AppV1Chart"
     repoURL: "git@github.com:vladbuk/argocd.git"
     targetRevision: HEAD
-    # helm:
-    #   valueFiles:
-    #   - values_dev.yaml
+    helm:
+      valueFiles:
+      - values.yaml
       # parameters:
       # - name: "container.image"
       #   value: adv4000/app1:v3
