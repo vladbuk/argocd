@@ -10,7 +10,7 @@ spec:
     name     : in-cluster
     namespace: default
   source:
-    path   : "HelmCharts/MyChart1"
+    path   : "argocd/HelmCharts/MyChart1"
     repoURL: "git@github.com:vladbuk/argocd.git"
     targetRevision: HEAD
     helm:
