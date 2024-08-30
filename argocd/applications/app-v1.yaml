@@ -2,13 +2,13 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name     : app-v1
-  namespace: default
+  namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     name     : in-cluster
-    namespace: default
+    namespace: argocd
   source:
     path   : "argocd/HelmCharts/AppV1Chart"
     repoURL: "git@github.com:vladbuk/argocd.git"
