@@ -10,7 +10,7 @@ spec:
     name     : in-cluster
     namespace: argocd
   source:
-    path   : "applications"
+    path   : "argocd/applications"
     repoURL: "git@github.com:vladbuk/argocd.git"
     targetRevision: HEAD
   project: default
