@@ -15,22 +15,22 @@ provider "google" {
   zone    = "us-east1-b"
 }
 
-variable "cluster_name" {
-  description = "The name of the GKE cluster"
-  type        = string
-  default     = "k8s"
-}
+# variable "cluster_name" {
+#   description = "The name of the GKE cluster"
+#   type        = string
+#   default     = "k8s"
+# }
 
-variable "cluster_location" {
-  description = "The location of the GKE cluster"
-  type        = string
-  default     = "us-east1-b"
-}
+# variable "cluster_location" {
+#   description = "The location of the GKE cluster"
+#   type        = string
+#   default     = "us-east1-b"
+# }
 
-variable "eks_cluster_name" {
-  description = "EKS Cluster name to deploy ArgoCD ROOT Application"
-  type        = string
-}
+# variable "eks_cluster_name" {
+#   description = "EKS Cluster name to deploy ArgoCD ROOT Application"
+#   type        = string
+# }
 
 variable "git_source_repoURL" {
   description = "GitSource repoURL to Track and deploy to EKS by ROOT Application"
@@ -51,19 +51,21 @@ variable "git_source_targetRevision" {
 }
 
 
-data "google_client_config" "default" {}
+# Retrieve an access token as the Terraform runner
+data "google_client_config" "provider" {}
 
-data "google_container_cluster" "primary" {
-  name     = var.cluster_name
-  location = var.cluster_location
+data "google_container_cluster" "my_cluster" {
+  name     = "k8s"
+  location = "us-east1-b"
 }
 
-
 provider "kubernetes" {
-    host                   = data.google_container_cluster.primary.endpoint
-    token                  = data.google_client_config.default.access_token
-    cluster_ca_certificate = base64decode(data.google_container_cluster.primary.master_auth[0].cluster_ca_certificate)
-  }
+  host  = "https://${data.google_container_cluster.my_cluster.endpoint}"
+  token = data.google_client_config.provider.access_token
+  cluster_ca_certificate = base64decode(
+    data.google_container_cluster.my_cluster.master_auth[0].cluster_ca_certificate,
+  )
+}
 
 resource "kubernetes_manifest" "argocd_root" {
   manifest = yamldecode(templatefile("${path.module}/root.yaml", {
